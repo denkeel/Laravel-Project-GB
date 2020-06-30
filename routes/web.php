@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('info', function () {
+    phpinfo();
+});
+
+Route::get('test', function () {
+    $name = request()->has('name') ? request()->get('name') : null;
+    if (is_null($name)) {
+        return "Укажите имя";
+    }
+
+    return "Hello, $name";
+});
