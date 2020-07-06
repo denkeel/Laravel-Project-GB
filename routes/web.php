@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'IndexController@index');
+//Route::get('/', 'IndexController@index');
+Route::get('/', 'NewsController@index');
 
 Route::group(
     [
         'prefix' => 'news'
     ],
     function() {
-        Route::get('/', 'NewsController@all');
         Route::get('/{id}', 'NewsController@one')->where('id', '\d+');
         Route::get('/categories', 'NewsController@categories'); // я правильно назвал, или здесь надо в единственном числе?
         Route::get('/add', 'NewsController@add');
@@ -28,3 +28,5 @@ Route::group(
     }
 );
 Route::get('auth', 'AuthController@index');
+
+Route::get('/home', 'HomeController@index')->name('home');

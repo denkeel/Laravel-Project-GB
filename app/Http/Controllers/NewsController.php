@@ -8,7 +8,7 @@ class NewsController extends Controller
 {
     public function index()
     {
-        return __METHOD__;
+        return view('news/index', ['id' => 0]);
     }
 
     public function all()
