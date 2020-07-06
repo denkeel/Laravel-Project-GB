@@ -13,19 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
 
-Route::get('info', function () {
-    phpinfo();
-});
-
-Route::get('test', function () {
-    $name = request()->has('name') ? request()->get('name') : null;
-    if (is_null($name)) {
-        return "Укажите имя";
+Route::group(
+    [
+        'prefix' => 'news'
+    ],
+    function() {
+        Route::get('/', 'NewsController@all');
+        Route::get('/{id}', 'NewsController@one')->where('id', '\d+');
+        Route::get('/categories', 'NewsController@categories'); // я правильно назвал, или здесь надо в единственном числе?
+        Route::get('/add', 'NewsController@add');
+        Route::get('/categories/{slug}', 'NewsController@showCategory');
     }
-
-    return "Hello, $name";
-});
+);
+Route::get('auth', 'AuthController@index');
