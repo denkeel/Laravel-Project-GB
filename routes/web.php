@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/', 'IndexController@index');
-Route::get('/', 'NewsController@index');
+Route::get('/', 'NewsController@index')->name('index');
 
 Route::group(
     [
@@ -23,8 +23,9 @@ Route::group(
     function() {
         Route::get('/{id}', 'NewsController@one')->where('id', '\d+');
         Route::get('/categories', 'NewsController@categories'); // я правильно назвал, или здесь надо в единственном числе?
-        Route::get('/add', 'NewsController@add');
+        Route::get('/add', 'NewsController@add')->name('news/add');
         Route::get('/categories/{slug}', 'NewsController@showCategory');
+        Route::post('/store', 'NewsController@store')->name('news/store');
     }
 );
 Route::get('auth', 'AuthController@index');

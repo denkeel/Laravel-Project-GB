@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateNewsRequest;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -20,7 +21,7 @@ class NewsController extends Controller
     {
         return view('news/one', ['id' => $id]);
     }
-
+    
     public function categories()
     {
         return __METHOD__;
@@ -30,9 +31,23 @@ class NewsController extends Controller
     {
         return __METHOD__ . ' Категория: ' . $slug;
     }
-
+    
     public function add()
     {
-        return __METHOD__;
+        return view('news/create');
+    }
+
+    public function store(CreateNewsRequest $request)
+    {
+        dd($request->validated());
+        $title = $request->input('title');
+        $text = $request->input('text');
+        $data = $request->path();
+        
+        $str = $title . ' ' . $text;
+        dd($str);
+        file_put_contents(storage_path('app/public/db.txt'), $str, FILE_APPEND);
+
+        return redirect()->route('index');
     }
 }
