@@ -8,17 +8,17 @@ class NewsController extends Controller
 {
     public function index()
     {
-        return __METHOD__;
+        return view('news/index', ['id' => 0]);
     }
-
+    
     public function all()
     {
         return __METHOD__;
     }
-
+    
     public function one($id)
     {
-        return __METHOD__ . ' Новость номер: ' . $id;
+        return view('news/one', ['id' => $id]);
     }
 
     public function categories()
