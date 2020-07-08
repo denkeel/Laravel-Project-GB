@@ -39,13 +39,13 @@ class NewsController extends Controller
 
     public function store(CreateNewsRequest $request)
     {
-        dd($request->validated());
+        //dd($request->validated());
         $title = $request->input('title');
         $text = $request->input('text');
         $data = $request->path();
         
         $str = $title . ' ' . $text;
-        dd($str);
+        //dd($str);
         file_put_contents(storage_path('app/public/db.txt'), $str, FILE_APPEND);
 
         return redirect()->route('index');
